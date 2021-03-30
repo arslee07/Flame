@@ -1,0 +1,15 @@
+site_name: Flame
+theme:
+  name: material
+  language: ru
+  icon:
+    logo: material/library
+  features: 
+    - navigation.instant
+    - navigation.tracking
+  palette:
+    primary: deep orange
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/TheFerryn/Flame/

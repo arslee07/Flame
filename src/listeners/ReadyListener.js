@@ -1,14 +1,21 @@
 const FlameListener = require('../structures/FlameListener');
+const MuteService = require('../services/MuteService');
 
 class ReadyListener extends FlameListener {
     constructor() {
         super('ReadyListener', { event: 'ready' });
     }
-    run(client) {
-        client.mongo.connect();
+    async run(client) {
+        await client.mongo.connect();
 
-        client.user.setActivity('https://github.com/TheFerryn/Flame', { type: 3 });
-        return console.log(`${client.user.tag}: Бот был успешно запущен.`);
+        /**
+         * Подгрузка всех мьютов, напоминаний и кулдаунов после перезапуска бота.
+         */
+
+        const mutes = await client.database.collection('mutes').find().toArray();
+        mutes.forEach((mute) => new MuteService(client).handle(mute));
+
+        return client.user.setActivity('https://github.com/TheFerryn/Flame', { type: 3 });
     }
 }
 

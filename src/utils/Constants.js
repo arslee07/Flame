@@ -1,6 +1,3 @@
-const getHelp = (message, command) => {
-    return message.client.commands.get('help').run(message, [command]);
-}
 const permissions = {
     ADMINISTRATOR: 'Администратор',
     VIEW_AUDIT_LOG: 'Просматривать журнал аудита',
@@ -33,8 +30,34 @@ const permissions = {
     MANAGE_WEBHOOKS: 'Управлять вебхуками',
     MANAGE_EMOJIS: 'Управлять эмодзи'
 }
+const regions = {
+    'eu-central': '🇪🇺 Центральная Европа',
+    'russia': '🇷🇺 Россия',
+    'us-central': '🇺🇸 Центральная США',
+    'us-east': '🇺🇸 Восточная США',
+    'us-south': '🇺🇸 Южная США',
+    'us-west': '🇺🇸 Западная США',
+    'hongkong': '🇭🇰 ГонгКонг',
+    'brazil': '🇧🇷 Бразилия',
+    'singapore': '🇸🇬 Сингапур',
+    'japan': '🇯🇵 Япония',
+    'sothafrica': '🇿🇦 Южная Африка',
+    'sydney': '🇦🇺 Сидней',
+    'india': '🇮🇳 Индия',
+    'eu-west': '🇪🇺 Западная Европа',
+    'europe': '🇪🇺 Европа',
+    'frankfurt': '🇩🇪 Франкфурт'
+}
+const verifyLevels = {
+    'NONE': 'Отсутствует',
+    'LOW': 'Низкий',
+    'MEDIUM': 'Средний',
+    'HIGH': 'Высокий',
+    'VERY_HIGH': 'Очень высокий'
+}
 
 module.exports = {
-    getHelp,
-    permissions
+    permissions,
+    regions,
+    verifyLevels
 }
