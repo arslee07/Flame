@@ -19,7 +19,7 @@ class Queue extends Map {
                 text: message.channel,
                 player
             });
-            
+
             dispatcher.queue.push(track);
             dispatcher.player.setVolume(50);
 
