@@ -38,7 +38,36 @@ const GuildSchema = {
         whiteList: []
     }
 };
+const UserSchema = {
+    warnings: [],
+    money: 0,
+    bank: 0,
+    pickaxe: {
+        wood: false,
+        stone: false,
+        iron: false,
+        diamond: false
+    },
+    rods: {
+        wood: false,
+        stone: false,
+        copper: false,
+        iron: false,
+        steel: false,
+        titanium: false
+    },
+    transport: {
+        boad: false,
+        carriage: false
+    },
+    payments: {
+        list: [],
+        blocked: false
+    },
+    ideaBlacklist: false
+}
 
 module.exports = {
-    GuildSchema
+    GuildSchema,
+    UserSchema
 };
