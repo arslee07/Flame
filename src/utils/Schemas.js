@@ -2,6 +2,8 @@ const GuildSchema = {
     prefix: 'f.',
     ideaChannel: null,
     ideaCount: 0,
+    cases: 0,
+    warnings: [],
     ideas: [],
     welcome: {
         enabled: false,
@@ -39,7 +41,6 @@ const GuildSchema = {
     }
 };
 const UserSchema = {
-    warnings: [],
     money: 0,
     bank: 0,
     pickaxe: {
