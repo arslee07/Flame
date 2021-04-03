@@ -42,7 +42,7 @@ class AcceptCommand extends FlameCommand {
             )
              message.reply(`✅ Предложению **#${id}** был успешно вынесен вердикт.`)
         } catch {
-            message.reply('Сообщения с указанным вами предложением было удалено :no_enry:');
+            message.reply('Сообщения с указанным вами предложением было удалено :no_entry:');
         }
     }
 }
