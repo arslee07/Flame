@@ -2,7 +2,7 @@ const FlameListener = require('../structures/FlameListener');
 const MuteManager = require('../managers/MuteManager');
 const { MessageEmbed } = require("discord.js");
 
-class ReadyListener extends FlameListener {
+class CommandErrorListener extends FlameListener {
     constructor() {
         super('CommandErrorListener', {event: 'commandError'});
     }
@@ -25,4 +25,4 @@ class ReadyListener extends FlameListener {
     }
 }
 
-module.exports = ReadyListener;
+module.exports = CommandErrorListener;
