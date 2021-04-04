@@ -1,12 +1,17 @@
 {
   "name": "flame",
   "version": "5.0.0",
-  "main": "src/index.js",
+  "main": "src/shard.js",
   "repository": "https://github.com/TheFerryn/Flame",
   "author": "TheFerryn",
   "license": "MIT",
   "dependencies": {
     "discord.js": "discordjs/discord.js",
-    "mongodb": "^3.6.4"
+    "fastify": "^3.14.0",
+    "fastify-rate-limit": "^5.5.0",
+    "mongodb": "^3.6.4",
+    "node-fetch": "^2.6.1",
+    "querystring": "^0.2.1",
+    "shoukaku": "1.5.2"
   }
 }

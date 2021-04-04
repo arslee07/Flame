@@ -1,4 +1,4 @@
-class MuteService {
+class MuteManager {
     constructor(client) {
         this.client = client;
     }
@@ -32,4 +32,4 @@ class MuteService {
     }
 }
 
-module.exports = MuteService;
+module.exports = MuteManager;

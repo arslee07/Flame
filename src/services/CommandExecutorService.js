@@ -9,8 +9,7 @@ class CommandsExecutorService {
     }
     async runCommand() {
         if (this.message.author.bot) return;
-        if (this.message.channel.type === 'dm' || !this.message.guild) return;
-
+    
         const data = await this.client.database.collection('guilds').findOne({ guildID: this.message.guild?.id });
         if (!this.message.content.startsWith(data?.prefix)) return;
 
