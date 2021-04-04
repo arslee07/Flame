@@ -26,17 +26,8 @@ class CommandsExecutorService {
                 this.client.emit('commandSuccess', command, this.message);
             } catch (e) {
                 this.client.emit('commandError', e, command, this.message)
-                console.error(e);
-
-                return this.message.channel.send(
-                    new MessageEmbed()
-                        .setTitle('Упс, что-то пошло не так…')
-                        .setDescription('При выполнении данной команды возникла неизвестная ошибка. Попробуйте пожалуйста позже, или обратитесь на сервер поддержки.')
-                        .setColor('#ff3333')
-                        .setFooter(this.message.guild.name, this.message.guild.iconURL())
-                        .setTimestamp()
-                )
             }
+
             cooldown.set(this.message.author.id, command.name);
 
             setTimeout(() => cooldown.delete(this.message.author.id), command.cooldown * 1000);
