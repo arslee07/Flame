@@ -7,7 +7,7 @@ class CommandErrorListener extends FlameListener {
         super('CommandErrorListener', {event: 'commandError'});
     }
 
-    async run(error, command, message) {
+    async run(error, message) {
         /**
          * Отправка сообщения об ошибке исполнения команды.
          */
@@ -17,9 +17,9 @@ class CommandErrorListener extends FlameListener {
         return message.channel.send(
             new MessageEmbed()
                 .setTitle('Упс, что-то пошло не так…')
-                .setDescription(`При выполнении команды ${command.name} возникла неизвестная ошибка. Попробуйте пожалуйста позже, или обратитесь на сервер поддержки.`)
+                .setDescription(`При выполнении данной команды возникла неизвестная ошибка. Попробуйте пожалуйста позже, или обратитесь на сервер поддержки.`)
                 .setColor('#ff3333')
-                .setFooter(this.message.guild.name, this.message.guild.iconURL())
+                .setFooter(message.guild.name, message.guild.iconURL())
                 .setTimestamp()
         )
     }
