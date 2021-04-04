@@ -12,7 +12,7 @@ class HelpCommand extends FlameCommand {
         });
     }
     async run(message, args) {
-        const categories = { general: 'Основное', moderation: 'Модерация' };
+        const categories = { general: 'Основное', moderation: 'Модераторские', music: 'Музыка' };
         const data = await message.client.database.collection('guilds').findOne({ guildID: message.guild.id });
 
 
@@ -26,7 +26,7 @@ class HelpCommand extends FlameCommand {
                 .setTimestamp()
 
             Object.keys(categories).forEach((i) => {
-                embed.addField(categories[i], [...new Set(message.client.commands.filter((cmd) => cmd.category == i).map((x) => `\`${data.prefix}${x.name}\``))].join(', '));
+                embed.addField(categories[i], [...new Set(message.client.commands.filter((cmd) => cmd.category == i).map((x) => `\`${x.name}\``))].join(', '));
             });
             return message.reply(embed);
             

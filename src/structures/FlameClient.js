@@ -1,12 +1,16 @@
 const { Client, Collection } = require('discord.js');
 const { loadListeners, loadCommands } = require('../utils/Loader');
 const MongoClient = require('mongodb').MongoClient;
+const FlamePlayer = require('./FlamePlayer');
+const FlameQueue = require('./FlameQueue');
 
 class FlameClient extends Client {
     constructor(options) {
         super(options);
         this.config = require('../../config.json');
         this.mongo = new MongoClient(this.config.database, { useNewUrlParser: true, useUnifiedTopology: true });
+        this.shoukaku = new FlamePlayer(this);
+        this.queue = new FlameQueue(this);
         this.listeners = new Collection();
         this.commands = new Collection();
     }

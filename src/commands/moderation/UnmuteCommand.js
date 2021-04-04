@@ -1,5 +1,5 @@
 const FlameCommand = require('../../structures/FlameCommand');
-const MuteService = require('../../services/MuteService');
+const MuteManager = require('../../managers/MuteManager');
 const { getHelp } = require('../../utils/Functions');
 
 class UnmuteCommand extends FlameCommand {
@@ -14,7 +14,7 @@ class UnmuteCommand extends FlameCommand {
         })
     }
     async run(message, args) {
-        const mutes = new MuteService(message.client);
+        const mutes = new MuteManager(message.client);
         const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 
         if (!user) return getHelp(message, this.name);

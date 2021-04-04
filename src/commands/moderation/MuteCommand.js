@@ -1,6 +1,6 @@
 const FlameCommand = require('../../structures/FlameCommand');
 const { getHelp, ms } = require('../../utils/Functions');
-const MuteService = require('../../services/MuteService');
+const MuteManager = require('../../managers/MuteManager');
 
 class MuteCommand extends FlameCommand {
     constructor() {
@@ -14,7 +14,7 @@ class MuteCommand extends FlameCommand {
         })
     }
     async run(message, args) {
-        const MuteManager = new MuteService(message.client);
+        const Mutes = new MuteManager(message.client);
 
         const user = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         const time = args[1];
@@ -25,7 +25,7 @@ class MuteCommand extends FlameCommand {
         const guild = await message.client.database.collection('guilds').findOne({ guildID: message.guild.id });
 
         if (!guild.muteRole || !message.guild.roles.cache.has(guild?.muteRole)) return message.reply('Похоже, на этом сервере не установлена роль мьюта. Установите ее прежде чем использовать данную команду :no_entry:');
-        if (await MuteManager.find({ guildID: message.guild.id, userID: user?.id }) && user.roles.cache.has(guild.muteRole)) return message.reply('Указанный вами пользователь уже замьючен на данном сервере :no_entry:');
+        if (await Mutes.find({ guildID: message.guild.id, userID: user?.id }) && user.roles.cache.has(guild.muteRole)) return message.reply('Указанный вами пользователь уже замьючен на данном сервере :no_entry:');
 
         if (!time) return getHelp(message, this.name);
         if (!ms(time) || ms(time) > ms('14d') || ms(time) < ms('1m')) return message.reply('Укажите пожалуйста **корректное** время (от одной минуты до 14 дней) :no_entry:');
@@ -41,12 +41,12 @@ class MuteCommand extends FlameCommand {
                 reason: args.slice(2).join(' ') || 'Причина не установлена.'
             }
         }
-        MuteManager.create(mute);
+        Mutes.create(mute);
 
         user.roles.add(guild.muteRole).catch(console.error);
         message.reply(`✅ Пользователь **${user.user.tag}** (${user.id}) был успешно замьючен модератором **${message.author.tag}**.`);
 
-        return MuteManager.handle(mute);
+        return Mutes.handle(mute);
     }
 }
 
