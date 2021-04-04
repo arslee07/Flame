@@ -20,10 +20,14 @@ class FlameApiWorker {
             }
         });
         this.app.setErrorHandler(function (error, request, response) {
-            if (response.statusCode == 429) error.message = 'You are being ratelimited, try again in a couple of minutes.';
+            switch (response.statusCode) {
+                case 429: 
+                    error.message = 'You are being ratelimited, try again in a couple of minutes.';
+                    break;
+            } 
             response.send(error);
         });
-        
+
         global.ApiWorker = this;
 
         require('../routes').forEach((route) => this.app.route(route));
