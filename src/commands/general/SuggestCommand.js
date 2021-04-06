@@ -30,11 +30,11 @@ class SuggestCommand extends FlameCommand {
             const collector = m.createReactionCollector((reaction, user) => user.id === message.author.id, { max: 1 });
             collector.on('collect', async (reaction) => {
                 if (reaction.emoji.name == '✅') {
-                    message.client.database.collection('guilds').updateOne({ guildID: message.guild.id }, { '$inc': { ideaCount: 1 } });
+                    const id = (data.ideas?.length ?? 0) + 1;
                     
                     const msg = await message.guild.channels.cache.get(data.ideaChannel).send(
                         new MessageEmbed()
-                            .setTitle(`Предложение #${data.ideaCount}`)
+                            .setTitle(`Предложение #${id}`)
                             .setColor('ffa500')
                             .setFooter(message.guild.name, message.guild.iconURL())
                             .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))
@@ -45,11 +45,14 @@ class SuggestCommand extends FlameCommand {
                     ['👍', '👎'].forEach((r) => msg.react(r));
                     message.client.database.collection('guilds').updateOne({ guildID: message.guild.id }, {
                         '$push': {
-                            ideas: { id: data.ideaCount, message: msg.id }
+                            ideas: { 
+                                id: id, 
+                                message: msg.id 
+                            }
                         }
                     });
 
-                    return m.edit(`Ваша идея была успешно отправлена. ID предложения: **${data.ideaCount}**`);
+                    return m.edit(`Ваша идея была успешно отправлена. ID предложения: **${id}**`);
                 } else if (reaction.emoji.name == '❎') {
                     return m.edit('Отменено.')
                 }

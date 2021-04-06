@@ -19,7 +19,6 @@ class MuteManager {
 
         return setTimeout(async () => {
             if (data.ends > Date.now()) return this.handle(data);
-
             const guild = this.client.guilds.cache.get(data.guildID);
             const mute = await this.find(data);
             

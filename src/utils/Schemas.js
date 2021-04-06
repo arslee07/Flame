@@ -1,8 +1,6 @@
 const GuildSchema = {
     prefix: 'f.',
     ideaChannel: null,
-    ideaCount: 0,
-    cases: 0,
     warnings: [],
     ideas: [],
     welcome: {

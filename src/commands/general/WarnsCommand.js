@@ -24,8 +24,8 @@ class WarnsCommand extends FlameCommand {
         if (!warns.length) embed.setDescription(`У данного пользователя отсутствуют предупреждения :smile:`);
         else {
             embed.setThumbnail(message.guild.iconURL())
-            for (const warn of warns.slice(0, 5)) {
-                embed.addField(`\`Случай #${warn.case}\`: ${new Date(warn.time).toISOString().replace('T', ' ').substr(0, 19)} (${warn.moderator})`, `**Причина:** ${warn.reason.slice(0, 999) || 'Причина не указана.'}`);
+            for (const warn of warns.slice(-10)) {
+                embed.addField(`\`Случай #${warn.id}\`: ${new Date(warn.time).toISOString().replace('T', ' ').substr(0, 19)} (${warn.moderator})`, `**Причина:** ${warn.reason.slice(0, 999) || 'Причина не указана.'}`);
             }
         }
 

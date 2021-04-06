@@ -12,22 +12,22 @@ class RemwarnCommand extends FlameCommand {
         })
     }
     async run(message, args) {
-        const modcase = args[0];
+        const id = args[0];
 
-        if (!modcase) return getHelp(message, this.name);
-        if (isNaN(modcase) || !parseInt(modcase) || parseInt(modcase) <= 0) return message.reply('Укажите пожалуйста **верный** случай :no_entry:');
+        if (!id) return getHelp(message, this.name);
+        if (isNaN(id) || !parseInt(id) || parseInt(id) <= 0) return message.reply('Укажите пожалуйста **верный** случай :no_entry:');
 
         const data = await message.client.database.collection('guilds').findOne({ guildID: message.guild.id });
-        const warn = data?.warnings.find((r) => r.case == parseInt(modcase));
+        const warn = data?.warnings.find((r) => r.id == parseInt(id));
 
         if (!warn) return message.reply('Указанный вами случай не был найден в базе данного сервера :no_entry:');
         message.client.database.collection('guilds').updateOne({ guildID: message.guild.id }, {
             '$pull': {
-                warnings: { case: parseInt(modcase) }
+                warnings: { id: parseInt(id) }
             }
         });
 
-        return message.channel.send(`✅ Предупреждение \`#${modcase}\` было успешно удалено.`);
+        return message.channel.send(`✅ Предупреждение \`#${id}\` было успешно удалено.`);
     }
 }
 
